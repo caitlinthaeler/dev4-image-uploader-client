@@ -1,11 +1,10 @@
 <script setup>
 import { RouterLink, useRoute } from 'vue-router'
-import NavbarSmall from '@/components/NavbarSmall.vue';
 </script>
 
 <template>
     <div>
-        <NavbarSmall />
+        helloworld
     </div>
 
 </template>
