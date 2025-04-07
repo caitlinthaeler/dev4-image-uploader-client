@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import HomeLayout from '@/layouts/HomeLayout.vue';
 import UploadView from '@/views/UploadView.vue';
+import RecentView from '@/views/RecentView.vue';
 
 
 const router = createRouter({
@@ -15,9 +16,9 @@ const router = createRouter({
             meta: { layout: HomeLayout}
         },
         {
-            path: '/recent/{id}',
+            path: '/recent',
             name: 'recent',
-            component: HomeView,
+            component: RecentView,
             meta: { layout: DefaultLayout}
         },
         {

@@ -27,11 +27,6 @@ const onChange = (e) => {
     console.log(canUpload.value);
 };
 
-// Watch for changes to canUpload and log the value
-watch(canUpload, (newValue) => {
-  console.log('canUpload updated:', newValue);
-});
-
 const onDragOver = (e) => {
     e.preventDefault();
     isDragging.value = true;
