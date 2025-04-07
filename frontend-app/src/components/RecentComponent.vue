@@ -2,7 +2,7 @@
 import ImageData from '@/components/ImageData.vue';
 import Downloadable from './Downloadable.vue';
 import { fetchRecent } from '@/utils/fetchRecent.js';
-import { ref, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import { viewImage } from '@/utils/viewImage.js';
 
 const imageId = ref(0)
@@ -10,7 +10,6 @@ const fileName = ref('');
 const fileSize = ref(0);
 const uploadDate = ref('');
 const uploadTime = ref('');
-
 
 const imageUrl = ref(null);
 const recentExists = ref(false);
@@ -43,16 +42,10 @@ onMounted(getRecent)
 </script>
 
 <template>
-    <div class="flex flex-row">
-        <ImageData />
+    <div class="flex flex-col md:flex-row space-y-10 space-x-10 items-start">
+        <ImageData :imageId="imageId" :fileName="fileName" :fileSize="fileSize" :uploadDate="uploadDate" :uploadTime="uploadTime"/>
         <div v-if="recentExists">
-            <img 
-            :src="imageUrl" 
-            alt="Recent Upload"
-            width="300"
-            height="300"
-            >
-            <!-- <Downloadable/> -->
+            <Downloadable :imageUrl="imageUrl" :fileName="fileName" :imageId="imageId" />
         </div>
         
     </div>

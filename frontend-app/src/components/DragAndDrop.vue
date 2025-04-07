@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import axios from 'axios';
+import ImageData from '@/components/ImageData.vue';
 
 const isDragging = ref(false);
 const file = ref(null);
@@ -9,6 +10,9 @@ const filePreview = ref(null);
 const canUpload = ref(false);
 const buttonRef = ref(null);
 
+const fileName = ref('');
+const fileSize = ref(0);
+
 const onChange = (e) => {
     console.log('new file selected');
     const selectedFile = e.target.files[0];
@@ -16,6 +20,8 @@ const onChange = (e) => {
         console.log('file selected successfully');
         console.log(selectedFile);
         file.value = selectedFile;
+        fileName.value = selectedFile.name;
+        fileSize.value = selectedFile.size;
         canUpload.value = true;
         console.log(file.value);
         filePreview.value = URL.createObjectURL(selectedFile);
@@ -42,6 +48,8 @@ const onDrop = (e) => {
     const selectedFile = e.dataTransfer.files[0];
     if (selectedFile) {
         file.value = selectedFile;
+        fileName.value = selectedFile.name;
+        fileSize.value = selectedFile.size;
         filePreview.value = URL.createObjectURL(selectedFile);
         canUpload.value = true;
 
@@ -71,6 +79,8 @@ const uploadFile = async () => {
         })
         console.log('File uploaded successfully:', response.data);
         file.value = null;
+        fileName.value = '';
+        fileSize.value = 0;
         filePreview.value = null;
         canUpload.value = false;
 
@@ -86,13 +96,13 @@ const uploadFile = async () => {
 </script>
 
 <template>
-    <div class="flex flex-col justify-center items-center w-96">
+    <div class="flex flex-col justify-center items-center w-96 space-y-10">
 
         <div class="flex justify-center items-center border-1 border-dashed rounded p-4 bg-gray-dark w-full"
         @drop.prevent="onDrop"
         @dragover.prevent="onDragOver"
         @dragleave="onDragLeave"
-        
+
         >
         </div>
 
@@ -106,24 +116,30 @@ const uploadFile = async () => {
 
         <label 
             for="file-upload"
-            class="cursor-pointer text-white text-lg"
+            class="cursor-pointer text-white text-lg w-full h-full"
             @click="onClick">
             Drag & Drop an image or click here to upload.
         </label>
 
-        
-         <div v-if="filePreview" class="mb-4">
-            <img :src="filePreview" alt="Image Preview" class="w-32 h-32 object-cover rounded">
-         </div>
 
-         <button
-         ref="buttonRef"
-         class="bg-olivine text-white px-4 py-2 rounded hover:bg-olivine-light disabled:bg-gray disabled:hover:bg-gray"
-         @click="uploadFile"
-         disabled
-         >
-         Upload Image
-         </button>
+        <div v-if="filePreview" class="mb-4">
+            <img :src="filePreview" alt="Image Preview" class="w-32 h-32 object-cover rounded">
+        </div>
+
+        <ul v-if="fileSize > 0" class="bg-gray-dark text-white p-5 h-full w-100">
+            <li class="text-lg font-bold">File Name: <span class="text-oyster">{{ fileName}}</span></li>
+            <li class="text-lg font-bold">File Size: <span class="text-oyster">{{ fileSize }} bytes</span></li>
+        </ul>
+
+        <button
+        ref="buttonRef"
+        class="bg-olivine text-white px-4 py-2 rounded hover:bg-olivine-light disabled:bg-gray disabled:hover:bg-gray"
+        @click="uploadFile"
+        disabled
+        >
+        Upload Image
+        </button>
     </div>
+
 </template>
 

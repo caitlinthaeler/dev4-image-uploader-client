@@ -4,6 +4,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import HomeLayout from '@/layouts/HomeLayout.vue';
 import UploadView from '@/views/UploadView.vue';
 import RecentView from '@/views/RecentView.vue';
+import BrowseView from '@/views/BrowseView.vue';
 
 
 const router = createRouter({
@@ -30,7 +31,7 @@ const router = createRouter({
         {
             path: '/browse',
             name: 'browse',
-            component: HomeView,
+            component: BrowseView,
             meta: { layout: DefaultLayout}
         },
     ]

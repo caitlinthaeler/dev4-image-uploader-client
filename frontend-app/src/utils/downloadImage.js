@@ -7,7 +7,8 @@ export const downloadImage = async (imageId) => {
             responseType: 'blob',
             withCredentials: false
         });
-        return response.data;
+
+        return response.data
     } catch (error) {
         console.error('Error downloading image:', error);
         // handle the various errors

@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-const targetRoute = 'http://localhost:5260/recent'
 export const fetchRecent = async () => {
     try {
-        const response = await axios.get(targetRoute);
+        const response = await axios.get('http://localhost:5260/recent');
         if (response.status === 200) {
             return response.data;
         } else {
