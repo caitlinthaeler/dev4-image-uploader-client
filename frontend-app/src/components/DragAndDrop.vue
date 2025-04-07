@@ -1,7 +1,6 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, computed } from 'vue';
 import axios from 'axios';
-import ImageData from '@/components/ImageData.vue';
 
 const isDragging = ref(false);
 const file = ref(null);
@@ -93,6 +92,17 @@ const uploadFile = async () => {
     }
 }
 
+const convertedFileSize = computed(() => {
+  const bytes = fileSize.value;
+  if (bytes === 0) return '0 Bytes';
+
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+  const size = bytes / Math.pow(1024, i);
+  return `${size.toFixed(1)} ${sizes[i]}`;
+
+});
+
 </script>
 
 <template>
@@ -128,7 +138,7 @@ const uploadFile = async () => {
 
         <ul v-if="fileSize > 0" class="bg-gray-dark text-white p-5 h-full w-100">
             <li class="text-lg font-bold">File Name: <span class="text-oyster">{{ fileName}}</span></li>
-            <li class="text-lg font-bold">File Size: <span class="text-oyster">{{ fileSize }} bytes</span></li>
+            <li class="text-lg font-bold">File Size: <span class="text-oyster">{{ convertedFileSize }}</span></li>
         </ul>
 
         <button

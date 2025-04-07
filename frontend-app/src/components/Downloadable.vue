@@ -50,6 +50,6 @@ const download = async () => {
             >
 
         <!-- Download button -->
-        <button @click="download" class="bg-seagull rounded p-5 w-full hover:bg-seagull-dark">Download</button>
+        <button @click="download" class="bg-seagull rounded p-5 w-100 hover:bg-seagull-dark">Download</button>
     </div>
 </template>

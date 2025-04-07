@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, defineProps } from 'vue';
+import { ref, onMounted, defineProps, computed } from 'vue';
 
 const props = defineProps({
     imageId: {
@@ -24,6 +24,17 @@ const props = defineProps({
     },
     
 });
+
+const convertedFileSize = computed(() => {
+  const bytes = props.fileSize;
+  if (bytes === 0) return '0 Bytes';
+
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+  const size = bytes / Math.pow(1024, i);
+  return `${size.toFixed(1)} ${sizes[i]}`;
+
+});
 </script>
 
 <template>
@@ -33,7 +44,7 @@ const props = defineProps({
             <li class="text-lg font-bold">File Name: <span class="text-oyster">{{ props.fileName }}</span></li>
             <li class="text-lg font-bold">Upload Date: <span class="text-oyster">{{ props.uploadDate }}</span></li>
             <li class="text-lg font-bold">Upload Time: <span class="text-oyster">{{ props.uploadTime }}</span></li>
-            <li class="text-lg font-bold">File Size: <span class="text-oyster">{{ props.fileSize }} bytes</span></li>
+            <li class="text-lg font-bold">File Size: <span class="text-oyster">{{ convertedFileSize }}</span></li>
         </ul>
     </div>
 </template>
