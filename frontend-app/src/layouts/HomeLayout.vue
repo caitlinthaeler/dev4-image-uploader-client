@@ -8,7 +8,7 @@ const { getNavIconClass, getNavTextClass } = useNavClasses();
 </script>
 
 <template>
-    <div class="bg-oyster h-full">
+    <div class="bg-oyster min-h-screen h-full">
         <div class="flex flex-row justify-between items-center p-4">
             <div class="w-full text-center">
                 <h1 class="text-white font-bold text-5xl">

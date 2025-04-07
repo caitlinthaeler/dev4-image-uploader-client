@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import HomeLayout from '@/layouts/HomeLayout.vue';
+import UploadView from '@/views/UploadView.vue';
 
 
 const router = createRouter({
@@ -22,7 +23,7 @@ const router = createRouter({
         {
             path: '/upload',
             name: 'upload',
-            component: HomeView,
+            component: UploadView,
             meta: { layout: DefaultLayout}
         },
         {
